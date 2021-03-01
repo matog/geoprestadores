@@ -1,14 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# TO DO:
-# - HECHO: Formulario especialización vacio, no actualizar la info y que no tire error
-# - Que cuando se elige otra provincia, el zoom muestre todos los puntos.
-#           Hay que armar un boundary con todos los puntos y zoomear a ese nivel. No se como
-# - HECHO: El error que tira cuando se selecciona un especialidad que no hay en una provincia: Arrancar con Dermatologia Cordoba, sumar catamarca, y borrar cordoba
-
-
-
-
 
 import dash
 import plotly.graph_objs as go
@@ -49,17 +40,18 @@ app.title = 'Georreferenciación de Prestadores  '
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([html.H1("Georreferenciación de prestadores",
-                        className='text-center text-primary, mb-4'),
+                        # className='text-center text-primary, mb-4'
+                 ),
                 ], width = 12)
     ]),
     dbc.Row([
         dbc.Col([
             dcc.Graph(id = 'mapa',
                       config={
-                          'displayModeBar': False,
-                          'displaylogo': False,
-                          'modeBarButtonsToRemove': ['zoom2d', 'hoverCompareCartesian', 'hoverClosestCartesian',
-                                                     'toggleSpikelines']
+                          # 'displayModeBar': False,
+                          # 'displaylogo': False,
+                          # 'modeBarButtonsToRemove': ['zoom2d', 'hoverCompareCartesian', 'hoverClosestCartesian',
+                          #                            'toggleSpikelines']
                       },
             ),
         ], width = 9),
@@ -72,13 +64,13 @@ app.layout = dbc.Container([
                                placeholder="Seleccione especialidad",
                                # bs_size="sm",
                                multi=True,
-                               style=dict(
-                                   width='100%',
-                                   display='inline-block',
-                                   # verticalAlign="middle",
-                                   fontSize= 10,
-                                   height = "100%",
-                               ),
+                               # style=dict(
+                               #     width='100%',
+                               #     display='inline-block',
+                               #     # verticalAlign="middle",
+                               #     fontSize= 10,
+                               #     height = "100%",
+                               # ),
                            ),
                     ]
                 ),
@@ -89,12 +81,12 @@ app.layout = dbc.Container([
                              value=['CORDOBA'],
                             placeholder="Seleccione provincia",
                             multi=True,
-                            style=dict(
-                                width='100%',
-                                display='inline-block',
-                                fontSize=10,
-                                height = "100%",
-                    )
+                    #         style=dict(
+                    #             width='100%',
+                    #             display='inline-block',
+                    #             fontSize=10,
+                    #             height = "100%",
+                    # )
                 )
             ),
             dbc.Row(
@@ -104,12 +96,12 @@ app.layout = dbc.Container([
                              value=[],
                              placeholder="Seleccione departamento",
                              multi=True,
-                             style=dict(
-                                width='100%',
-                                display='inline-block',
-                                fontSize=10,
-                                height = '100%',
-                    )
+                    #          style=dict(
+                    #             width='100%',
+                    #             display='inline-block',
+                    #             fontSize=10,
+                    #             height = '100%',
+                    # )
                 ),
         ),
     ], width = 3),
@@ -144,8 +136,8 @@ app.layout = dbc.Container([
                 style_as_list_view=True,
                 style_cell={
                     # 'font_family': 'cursive',
-                    'font_size': '8px',
-                    'padding': '1px',
+                    # 'font_size': '8px',
+                    # 'padding': '1px',
                     # 'text_align': 'center'
                 },
             ),
