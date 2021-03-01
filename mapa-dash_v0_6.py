@@ -205,7 +205,7 @@ def update_graph(provincia, selected_dropdown_value, especialiadad):
                     print(selected_dropdown_value)
                     print(especialiadad)
                 
-                color_discrete = {'Dermatología': 'rgb(255,0,0)', 'Cardiología': 'rgb(0,255,0)', 'Pediatría': 'rgb(0,0,255)'}
+                # color_discrete = {'Dermatología': 'rgb(255,0,0)', 'Cardiología': 'rgb(0,255,0)', 'Pediatría': 'rgb(0,0,255)'}
                 fig = px.scatter_mapbox(dff, lat="DirGeoY", lon="DirGeoX",
                                         color = "descripcion",
                                         # color_discrete_map=color_discrete,
