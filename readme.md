@@ -5,4 +5,6 @@ Permite varios filtros, y una alta velocidad de actualización de la info desple
 
 100% en python, utilizando el framework _Dash_
 
-![image](https://user-images.githubusercontent.com/660448/109395626-24dd8d80-790c-11eb-91d8-fbb58bdd90ae.png)
+Los datos fueron generados con el paquete [Faker](https://faker.readthedocs.io/).
+
+![image](https://user-images.githubusercontent.com/660448/109530400-6e0d1900-7a95-11eb-86a1-42e2263e66c7.png)
