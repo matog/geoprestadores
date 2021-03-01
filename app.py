@@ -39,7 +39,7 @@ app = dash.Dash(__name__,
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5,'}]
                 )
-
+server = app.server
 alert = dbc.Alert("Por favor complete todos ls campos para poder georreferenciar.",
                   color="danger",
                   duration = 3000,
@@ -169,7 +169,6 @@ def set_cities_options(provincia):
         if type(provincia) == 'str':
             dff = df[df.name_prov == provincia]
         else:
-            print(provincia)
             dff = df[df.name_prov.isin(provincia)]
 
         departamentos = [{'label': c.title(), 'value': c} for c in sorted(dff.name_depto.unique())]
@@ -195,15 +194,15 @@ def update_graph(provincia, selected_dropdown_value, especialiadad):
                     dff = df[(df.name_depto.isin(selected_dropdown_value)) & (df.descripcion.isin(especialiadad)) & (df.name_prov.isin(provincia))]
                     if dff.empty:
                         print(dff)
-                        print('------------------------------------------------------------')
-                    print(selected_dropdown_value)
-                    print(especialiadad)
+                        # print('------------------------------------------------------------')
+                    # print(selected_dropdown_value)
+                    # print(especialiadad)
                 else:
                     dff = df[(df.name_depto.isin(selected_dropdown_value)) & (df.descripcion.isin(especialiadad)) & (df.name_prov.isin(provincia))]
                     if dff.empty:
                         return dash.no_update, alert, dash.no_update
-                    print(selected_dropdown_value)
-                    print(especialiadad)
+                    # print(selected_dropdown_value)
+                    # print(especialiadad)
                 
                 # color_discrete = {'Dermatología': 'rgb(255,0,0)', 'Cardiología': 'rgb(0,255,0)', 'Pediatría': 'rgb(0,0,255)'}
                 fig = px.scatter_mapbox(dff, lat="DirGeoY", lon="DirGeoX",
