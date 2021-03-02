@@ -143,6 +143,11 @@ app.layout = dbc.Container([
             ),
         ], width=12),
     ),
+    dbc.Row([
+        dbc.Col(html.A('Datos generados con el módulo Faker de Python', href='https://faker.readthedocs.io/', target="_blank")),
+        dbc.Col(),
+        dbc.Col(html.A('By Mato', href='http://matog.github.io/cv', target="_blank"), style={'text-align': 'right'})
+    ])
 ])
 
 #---------------------------------------------------------------
