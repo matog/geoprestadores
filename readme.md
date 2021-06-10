@@ -9,4 +9,6 @@ Los datos fueron generados con el paquete [Faker](https://faker.readthedocs.io/)
 
 Una versión demo está alojada en [Heroku](https://geo-prestadores.herokuapp.com/)
 
+### Screenshot
+
 ![image](https://user-images.githubusercontent.com/660448/109530400-6e0d1900-7a95-11eb-86a1-42e2263e66c7.png)
