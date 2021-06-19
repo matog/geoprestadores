@@ -5,3 +5,4 @@ __pycache__/
 basura
 prestadores_CB3_DATA_STUDIO_QGIS_IV (original).csv
 *.env
+venv_mapa/
