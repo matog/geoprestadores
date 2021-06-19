@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+################################################################
+################################################################
+# TO DO:
+# - Modificar el label "descripcion" por Especialidad en le gráfico
+# - Subir los divs de Alert y agregar un margin botton. Y meterlos en una columna desntro del div
+# Img: https://unsplash.com/@stevep4
+################################################################
+################################################################
 
 
 import dash
@@ -31,99 +39,112 @@ app = dash.Dash(__name__,
                             'content': 'width=device-width, initial-scale=1.0, maximum-scale=1.2, minimum-scale=0.5,'}]
                 )
 server = app.server
-alert = dbc.Alert("Por favor complete todos ls campos para poder georreferenciar.",
+alert = dbc.Alert("Por favor complete todos los campos para poder georreferenciar.",
                   color="danger",
-                  duration = 3000,
+                  duration
+                  = 3000,
                   # dismissable=True
                   )  # use dismissable or duration=5000 for alert to close in x milliseconds
 app.title = 'Georreferenciación de Prestadores  '
 app.layout = dbc.Container([
-    dbc.Row([
-        dbc.Col([html.H1("Georreferenciación de prestadores",
-                        # className='text-center text-primary, mb-4'
-                 ),
-                ], width = 12)
-    ]),
-    dbc.Row([
-        dbc.Col([
-            dcc.Graph(id = 'mapa',
-                      config={
-                          # 'displayModeBar': False,
-                          # 'displaylogo': False,
-                          # 'modeBarButtonsToRemove': ['zoom2d', 'hoverCompareCartesian', 'hoverClosestCartesian',
-                          #                            'toggleSpikelines']
-                      },
+    # html.Div(
+    #     html.H1("Georreferenciación de prestadores",
+    #                 style={'text-align': 'center'},
+    #                 ),
+    #     style = {'padding':100,
+    #                 'background-image': 'url(/assets/stephen-monroe-yg8Cz-i5U30-unsplash.jpg)',
+    #                 'margin-bottom': 10,
+    #                 'text-align': 'center'}
+    # ),
+    #
+	html.Div([
+			html.Div([
+			        html.Div([
+				            html.Div([
+                                html.H1('GeoMap', className="mb-3 text-white"),
+				                html.H4('Georreferenciación de prestadores',className="mb-3 text-white")
+                            ],className="text_white")
+                    ],className="p-5 text-center bg-image")
+            ],className="mask",
+              style= {'background-color':'rgba(0, 0, 0, 0.6)',
+			          'height': '200px',
+			          'background-size': '200% 300%'
+                     }
             ),
-        ], width = 9),
-        dbc.Col([
-            dbc.Row([
-                    dcc.Dropdown(
-                               id='especialidad-dpdn',
-                               options=[{'label': x.title(), 'value': x} for x in sorted(df.descripcion.unique())],
-                               value=['Dermatología'],
-                               placeholder="Seleccione especialidad",
-                               # bs_size="sm",
-                               multi=True,
-                               # style=dict(
-                               #     width='100%',
-                               #     display='inline-block',
-                               #     # verticalAlign="middle",
-                               #     fontSize= 10,
-                               #     height = "100%",
-                               # ),
-                           ),
-                    ]
-                ),
-            dbc.Row(
+        ], className='p-5 text-center bg-image',
+    style={'background-image': 'url(/assets/stephen-monroe-yg8Cz-i5U30-unsplash.jpg)',
+           'margin-bottom': 10,}),
+
+
+    html.Div(children=[
+        html.Div([
+            dcc.Dropdown(
+                id='especialidad-dpdn',
+                options=[{'label': x.title(), 'value': x} for x in sorted(df.descripcion.unique())],
+                value=['Dermatología'],
+                placeholder="Seleccione especialidad",
+                # bs_size="sm",
+                multi=True,
+                # style=dict(
+                #     width='100%',
+                #     display='inline-block',
+                #     # verticalAlign="middle",
+                #     fontSize= 10,
+                #     height = "100%",
+                # ),
+            ),
+        ], className='col',
+        style={'margin-bottom': 10}
+        ),
+    ], className='row'),
+    html.Div(children=[
+        html.Div(children=[
+            html.Div(
                 dcc.Dropdown(
-                             id='prov-dpdn',
-                             options=[{'label': x.title(), 'value': x} for x in sorted(df.name_prov.unique())],
-                             value=['CORDOBA'],
-                            placeholder="Seleccione provincia",
-                            multi=True,
+                    id='prov-dpdn',
+                    options=[{'label': x.title(), 'value': x} for x in sorted(df.name_prov.unique())],
+                    value=['CORDOBA'],
+                    placeholder="Seleccione provincia",
+                    multi=True,
                     #         style=dict(
                     #             width='100%',
                     #             display='inline-block',
                     #             fontSize=10,
                     #             height = "100%",
                     # )
-                )
+                ), className='col'
             ),
-            dbc.Row(
+            html.Div(
                 dcc.Dropdown(
-                             id='depto-dpdn',
-                             options=[],
-                             value=[],
-                             placeholder="Seleccione departamento",
-                             multi=True,
-                    #          style=dict(
-                    #             width='100%',
-                    #             display='inline-block',
-                    #             fontSize=10,
-                    #             height = '100%',
-                    # )
-                ),
-        ),
-    ], width = 3),
-    dbc.Row(
-        dbc.Col(
-            html.Div(
-                id = "alert_prov",
-                children = []
-            )
-        )
+                    id='depto-dpdn',
+                    options=[],
+                    value=[],
+                    placeholder="Seleccione departamento",
+                    multi=True,
+                ), className='col'
+            ),
+        ], className='row')
+    ],style={'margin-bottom': 10}),
+    html.Div(
+        id="alert_prov",
+        className='col',
+        style = {'margin-bottom': 10,
+                 'width' : '100%'},
     ),
-    dbc.Row(
-        dbc.Col(
-            html.Div(
-                id="alert_map",
-                children = []
-            )
-        )
-    )
-    ]),
-    dbc.Row(
-        dbc.Col([
+    html.Div(
+        id="alert_map",
+        style={'margin-bottom': 10,
+               'width' : '100%'},
+        className='col'
+    ),
+    html.Div([
+        dcc.Graph(id = 'mapa',
+                  config={
+                  },
+        ),
+        ], style={'margin-bottom': 10}),
+    html.Div(
+        html.Div(
             dash_table.DataTable(
                 id='table-prestador',
                 columns=[
@@ -134,21 +155,35 @@ app.layout = dbc.Container([
                 page_action="native",
                 page_size=10,
                 style_as_list_view=True,
-                style_cell={
-                    # 'font_family': 'cursive',
-                    # 'font_size': '8px',
-                    # 'padding': '1px',
-                    # 'text_align': 'center'
-                },
-            ),
-        ], width=12),
+            ), className='col'),
+        className = 'row',
+            style={'margin-bottom': 10}
     ),
-    dbc.Row([
-        dbc.Col(html.A('Datos generados con el módulo Faker de Python', href='https://faker.readthedocs.io/', target="_blank")),
-        dbc.Col(),
-        dbc.Col(html.A('By Mato', href='http://matog.github.io/cv', target="_blank"), style={'text-align': 'right'})
-    ])
-])
+    html.Div(children=[
+        html.Div(children=[
+            html.A('Datos generados con el módulo Faker de Python', href='https://faker.readthedocs.io/', target="_blank"),
+            html.P(''),
+            html.A('Código en Github', href='http://matog.github.io/cv', target='_blank', style={'text-align': 'right'})
+        ])
+    ], )
+], style = {'font_family': 'Roboto',
+            'background-color': '#f8f9fa'
+    }
+)
+
+#
+# <footer class="footer mt-auto py-3 bg-light">
+# 		  <div class="container">
+# 			<span class="text-muted container text-center">
+# 				<p>
+# 					<h6>
+# 						<a href="https://github.com/matog/FakeDiyClassifier-Flask">Código en Github</a> // Imagen de <a href="https://unsplash.com/photos/HeNrEdA4Zp4">Utsav Srestha</a>
+# 					</h6>
+# 				</p>
+# 			</span>
+# 		  </div>
+# 		</footer>
+#
 
 #---------------------------------------------------------------
 # Callback
@@ -189,6 +224,7 @@ def update_graph(provincia, selected_dropdown_value, especialiadad):
             if len(selected_dropdown_value) > 0:
                 if type(selected_dropdown_value) == 'str':
                     dff = df[(df.name_depto.isin(selected_dropdown_value)) & (df.descripcion.isin(especialiadad)) & (df.name_prov.isin(provincia))]
+                    dff = dff.rename(columns={'descripcion': 'Especialidad'})
                     if dff.empty:
                         print(dff)
                         # print('------------------------------------------------------------')
@@ -196,6 +232,7 @@ def update_graph(provincia, selected_dropdown_value, especialiadad):
                     # print(especialiadad)
                 else:
                     dff = df[(df.name_depto.isin(selected_dropdown_value)) & (df.descripcion.isin(especialiadad)) & (df.name_prov.isin(provincia))]
+                    dff= dff.rename(columns={'descripcion': 'Especialidad'})
                     if dff.empty:
                         return dash.no_update, alert, dash.no_update
                     # print(selected_dropdown_value)
@@ -203,7 +240,7 @@ def update_graph(provincia, selected_dropdown_value, especialiadad):
                 
                 # color_discrete = {'Dermatología': 'rgb(255,0,0)', 'Cardiología': 'rgb(0,255,0)', 'Pediatría': 'rgb(0,0,255)'}
                 fig = px.scatter_mapbox(dff, lat="DirGeoY", lon="DirGeoX",
-                                        color = "descripcion",
+                                        color = "Especialidad",
                                         # color_discrete_map=color_discrete,
                                         # hover_name="Apellido",
                                         # hover_data=['hover_data'],
